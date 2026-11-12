@@ -14,7 +14,7 @@ public class CustomerDAO1 extends DAO1 {
     // tìm khách theo số điện thoại, chưa có thì thêm mới
     public Customer1 getOrCreateCustomer(Customer1 cust) {
         try {
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM Customer WHERE phoneNumber = ?");
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM Customer1 WHERE phoneNumber = ?");
             ps.setString(1, cust.getPhoneNumber());
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
@@ -27,7 +27,7 @@ public class CustomerDAO1 extends DAO1 {
                 return found;
             }
 
-            String sql = "INSERT INTO Customer (fullName, phoneNumber, email, note) VALUES (?, ?, ?, ?)";
+            String sql = "INSERT INTO Customer1 (fullName, phoneNumber, email, note) VALUES (?, ?, ?, ?)";
             PreparedStatement ps2 = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps2.setString(1, cust.getFullName());
             ps2.setString(2, cust.getPhoneNumber());

@@ -13,8 +13,8 @@ public class ReservationDAO1 extends DAO1 {
 
     private static final String SELECT_ALL =
             "SELECT r.*, t.tableCode, t.tableName, t.location, t.minCapacity, t.maxCapacity, c.fullName, c.phoneNumber, c.email "
-            + "FROM Reservation r JOIN DiningTable t ON r.tableId = t.id "
-            + "JOIN Customer c ON r.customerId = c.id ";
+            + "FROM Reservation1 r JOIN DiningTable1 t ON r.tableId = t.id "
+            + "JOIN Customer1 c ON r.customerId = c.id ";
 
     public ReservationDAO1() {
         super();
@@ -22,7 +22,7 @@ public class ReservationDAO1 extends DAO1 {
 
     // lưu đơn mới, mã đặt bàn dạng DB0001, DB0002...
     public boolean createReservation(Reservation1 res) {
-        String sql = "INSERT INTO Reservation (reservationCode, arrivalDate, arrivalTime, guestCount, note, "
+        String sql = "INSERT INTO Reservation1 (reservationCode, arrivalDate, arrivalTime, guestCount, note, "
                 + "createdAt, reservationStatus, tableId, customerId) VALUES ('TMP', ?, ?, ?, ?, ?, ?, ?, ?)";
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -40,7 +40,7 @@ public class ReservationDAO1 extends DAO1 {
             if (keys.next()) {
                 int id = keys.getInt(1);
                 String code = String.format("DB%04d", id);
-                PreparedStatement ps2 = con.prepareStatement("UPDATE Reservation SET reservationCode = ? WHERE id = ?");
+                PreparedStatement ps2 = con.prepareStatement("UPDATE Reservation1 SET reservationCode = ? WHERE id = ?");
                 ps2.setString(1, code);
                 ps2.setInt(2, id);
                 ps2.executeUpdate();

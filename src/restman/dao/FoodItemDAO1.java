@@ -15,7 +15,7 @@ public class FoodItemDAO1 extends DAO1 {
     public FoodItem1[] getAllFoodItem() {
         ArrayList<FoodItem1> list = new ArrayList<FoodItem1>();
         try {
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM FoodItem ORDER BY id");
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM FoodItem1 ORDER BY id");
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 list.add(readFood(rs));
@@ -28,7 +28,7 @@ public class FoodItemDAO1 extends DAO1 {
 
     // lưu món mới, mã món tự sinh dạng MA001, MA002... theo id
     public boolean addFoodItem(FoodItem1 food) {
-        String sql = "INSERT INTO FoodItem (foodCode, foodName, foodCategory, description, image, servingStatus, unitPrice) "
+        String sql = "INSERT INTO FoodItem1 (foodCode, foodName, foodCategory, description, image, servingStatus, unitPrice) "
                 + "VALUES (?, ?, ?, ?, ?, ?, ?)";
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -46,7 +46,7 @@ public class FoodItemDAO1 extends DAO1 {
             if (keys.next()) {
                 int id = keys.getInt(1);
                 String code = String.format("MA%03d", id);
-                PreparedStatement up = con.prepareStatement("UPDATE FoodItem SET foodCode = ? WHERE id = ?");
+                PreparedStatement up = con.prepareStatement("UPDATE FoodItem1 SET foodCode = ? WHERE id = ?");
                 up.setString(1, code);
                 up.setInt(2, id);
                 up.executeUpdate();

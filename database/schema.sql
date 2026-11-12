@@ -4,29 +4,8 @@ DROP DATABASE IF EXISTS restman;
 CREATE DATABASE restman CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE restman;
 
--- Nhan vien (lop Employee1)
-CREATE TABLE Employee (
-    id            INT AUTO_INCREMENT PRIMARY KEY,
-    fullName      VARCHAR(255) NOT NULL,
-    phoneNumber   VARCHAR(20)  NOT NULL,
-    email         VARCHAR(255),
-    position      VARCHAR(100) NOT NULL,
-    workingStatus VARCHAR(50)  NOT NULL
-);
-
--- Tai khoan dang nhap cua nhan vien (lop Account1). role: Manager / WarehouseStaff / SalesStaff
-CREATE TABLE Account (
-    id            INT AUTO_INCREMENT PRIMARY KEY,
-    username      VARCHAR(50)  NOT NULL UNIQUE,
-    password      VARCHAR(100) NOT NULL,
-    role          VARCHAR(50)  NOT NULL,
-    accountStatus VARCHAR(50)  NOT NULL,
-    employeeId    INT          NOT NULL UNIQUE,
-    FOREIGN KEY (employeeId) REFERENCES Employee(id)
-);
-
 -- Mon an (lop FoodItem1)
-CREATE TABLE FoodItem (
+CREATE TABLE FoodItem1 (
     id            INT AUTO_INCREMENT PRIMARY KEY,
     foodCode      VARCHAR(20)  NOT NULL UNIQUE,
     foodName      VARCHAR(255) NOT NULL,
@@ -38,7 +17,7 @@ CREATE TABLE FoodItem (
 );
 
 -- Ban an (lop DiningTable1)
-CREATE TABLE DiningTable (
+CREATE TABLE DiningTable1 (
     id              INT AUTO_INCREMENT PRIMARY KEY,
     tableCode       VARCHAR(20)  NOT NULL UNIQUE,
     tableName       VARCHAR(255) NOT NULL,
@@ -49,7 +28,7 @@ CREATE TABLE DiningTable (
 );
 
 -- Khach hang (lop Customer1)
-CREATE TABLE Customer (
+CREATE TABLE Customer1 (
     id          INT AUTO_INCREMENT PRIMARY KEY,
     fullName    VARCHAR(255) NOT NULL,
     phoneNumber VARCHAR(20)  NOT NULL UNIQUE,
@@ -58,7 +37,7 @@ CREATE TABLE Customer (
 );
 
 -- Don dat ban (lop Reservation1)
-CREATE TABLE Reservation (
+CREATE TABLE Reservation1 (
     id                INT AUTO_INCREMENT PRIMARY KEY,
     reservationCode   VARCHAR(20)  NOT NULL,
     arrivalDate       DATE         NOT NULL,
@@ -69,18 +48,12 @@ CREATE TABLE Reservation (
     reservationStatus VARCHAR(50)  NOT NULL,
     tableId           INT          NOT NULL,
     customerId        INT          NOT NULL,
-    FOREIGN KEY (tableId)    REFERENCES DiningTable(id),
-    FOREIGN KEY (customerId) REFERENCES Customer(id)
+    FOREIGN KEY (tableId)    REFERENCES DiningTable1(id),
+    FOREIGN KEY (customerId) REFERENCES Customer1(id)
 );
 
 -- du lieu mau
-INSERT INTO Employee (fullName, phoneNumber, email, position, workingStatus) VALUES
-('Nguyễn Trung Nghĩa', '0901000001', 'quanly@restman.vn', 'Nhân viên quản lý', 'Đang làm');
-
-INSERT INTO Account (username, password, role, accountStatus, employeeId) VALUES
-('b23dcat211',  '123456', 'Manager',    'Hoạt động', 1);
-
-INSERT INTO FoodItem (foodCode, foodName, foodCategory, description, image, servingStatus, unitPrice) VALUES
+INSERT INTO FoodItem1 (foodCode, foodName, foodCategory, description, image, servingStatus, unitPrice) VALUES
 ('MA001', 'Bò Wagyu áp chảo',          'Món chính',   'Bò Wagyu A5 áp chảo, sốt rượu vang đỏ, khoai tây nghiền bơ', '', 'Đang phục vụ', 1250000),
 ('MA002', 'Cá tuyết sốt bơ chanh',     'Món chính',   'Cá tuyết Alaska nướng, sốt bơ chanh, măng tây',               '', 'Đang phục vụ', 690000),
 ('MA003', 'Sườn cừu nướng thảo mộc',   'Món chính',   'Sườn cừu New Zealand nướng thảo mộc, sốt bạc hà',             '', 'Đang phục vụ', 820000),
@@ -96,7 +69,7 @@ INSERT INTO FoodItem (foodCode, foodName, foodCategory, description, image, serv
 ('MA013', 'Rượu vang đỏ Bordeaux (ly)', 'Đồ uống',   'Vang đỏ Pháp, hương trái cây đen',                            '', 'Đang phục vụ', 220000),
 ('MA014', 'Trà ô long hoa nhài',       'Đồ uống',     'Trà ô long ướp hoa nhài, phục vụ nguyên ấm',                  '', 'Đang phục vụ', 120000);
 
-INSERT INTO DiningTable (tableCode, tableName, location, operatingStatus, minCapacity, maxCapacity) VALUES
+INSERT INTO DiningTable1 (tableCode, tableName, location, operatingStatus, minCapacity, maxCapacity) VALUES
 ('B01', 'Bàn 01', 'Tầng 1 - Cạnh cửa sổ',   'Hoạt động', 2, 4),
 ('B02', 'Bàn 02', 'Tầng 1 - Khu trung tâm', 'Hoạt động', 2, 4),
 ('B03', 'Bàn 03', 'Tầng 1 - Ngoài sân',     'Hoạt động', 4, 6),
@@ -105,5 +78,5 @@ INSERT INTO DiningTable (tableCode, tableName, location, operatingStatus, minCap
 ('B06', 'Bàn 06', 'Tầng 2 - Cạnh cửa sổ',   'Hoạt động', 6, 8),
 ('B07', 'Bàn 07', 'Tầng 2 - Phòng riêng',   'Hoạt động', 8, 10);
 
-INSERT INTO Customer (fullName, phoneNumber, email, note) VALUES
+INSERT INTO Customer1 (fullName, phoneNumber, email, note) VALUES
 ('Nguyễn Minh Anh', '0987654321', 'minhanh@gmail.com', '');

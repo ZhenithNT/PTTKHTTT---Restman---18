@@ -16,9 +16,9 @@ public class DiningTableDAO1 extends DAO1 {
     // bàn đang hoạt động, vừa số khách và chưa ai đặt trong ngày đó
     public DiningTable1[] searchAvailableTables(LocalDate arrivalDate, int guestCount) {
         ArrayList<DiningTable1> list = new ArrayList<DiningTable1>();
-        String sql = "SELECT * FROM DiningTable t "
+        String sql = "SELECT * FROM DiningTable1 t "
                 + "WHERE t.operatingStatus = 'Hoạt động' AND t.minCapacity <= ? AND t.maxCapacity >= ? "
-                + "AND NOT EXISTS (SELECT 1 FROM Reservation r WHERE r.tableId = t.id "
+                + "AND NOT EXISTS (SELECT 1 FROM Reservation1 r WHERE r.tableId = t.id "
                 + "AND r.arrivalDate = ? AND r.reservationStatus = 'Đã đặt') "
                 + "ORDER BY t.maxCapacity, t.tableCode";
         try {
@@ -38,7 +38,7 @@ public class DiningTableDAO1 extends DAO1 {
 
     // kiểm tra lại bàn còn trống trong ngày không
     public boolean checkTableAvailable(int tableId, LocalDate arrivalDate) {
-        String sql = "SELECT id FROM Reservation WHERE tableId = ? AND arrivalDate = ? "
+        String sql = "SELECT id FROM Reservation1 WHERE tableId = ? AND arrivalDate = ? "
                 + "AND reservationStatus = 'Đã đặt'";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -53,7 +53,7 @@ public class DiningTableDAO1 extends DAO1 {
 
     public DiningTable1 getTableById(int tableId) {
         try {
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM DiningTable WHERE id = ?");
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM DiningTable1 WHERE id = ?");
             ps.setInt(1, tableId);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
