@@ -1,0 +1,33 @@
+<%@ page pageEncoding="UTF-8" %>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>RestMan - <%= pageTitle.isEmpty() ? "Đặt bàn trực tuyến" : pageTitle %></title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="topbar">
+    <div class="topbar-in">
+        <a class="brand" href="CustomerMainFrm1.jsp">RestMan</a>
+        <div class="nav">
+            <a href="SearchAvailableTableFrm1.jsp">Đặt bàn</a>
+        </div>
+    </div>
+</div>
+<% if (!pageTitle.isEmpty()) { %>
+<div class="container">
+<div class="card">
+    <h1><%= pageTitle %></h1>
+    <hr class="rule">
+    <div class="sub"><%= pageSub %></div>
+    <% if (step > 0) {
+           String[] stepNames = {"Tìm bàn", "Chọn bàn", "Thông tin", "Hoàn tất"}; %>
+    <ul class="steps">
+        <% for (int i = 1; i <= 4; i++) { %>
+        <li class="<%= i < step ? "done" : (i == step ? "now" : "") %>"><%= i %>. <%= stepNames[i - 1] %></li>
+        <% } %>
+    </ul>
+    <% } %>
+<% } %>

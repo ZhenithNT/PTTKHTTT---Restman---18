@@ -1,0 +1,24 @@
+<%@ page pageEncoding="UTF-8" %>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>RestMan Quản lý - <%= pageTitle %></title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="topbar">
+    <div class="topbar-in">
+        <a class="brand" href="ManagerMainFrm1.jsp">RestMan<small>QUẢN LÝ</small></a>
+        <div class="nav">
+            <a href="DishManagementFrm1.jsp">Món ăn</a>
+            <a href="#" onclick="return false;">Đăng xuất</a>
+        </div>
+    </div>
+</div>
+<div class="container">
+<div class="card">
+    <h1><%= pageTitle %></h1>
+    <hr class="rule">
+    <div class="sub"><%= pageSub %></div>

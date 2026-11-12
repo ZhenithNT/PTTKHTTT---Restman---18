@@ -1,0 +1,6 @@
+<% if (!pageTitle.isEmpty()) { %>
+</div>
+</div>
+<% } %>
+</body>
+</html>
